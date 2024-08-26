@@ -1,20 +1,16 @@
-# .github/workflows/ci.yml
-name: CI Pipeline
+name: Palindrome Function CI
 
-# Trigger the workflow on push or pull request events to the main branch
+# Trigger the workflow on push or pull requests to the main branch
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-# Define the jobs that run in this workflow
 jobs:
-  build:
-    # Use the latest Ubuntu environment
+  build-and-test:
     runs-on: ubuntu-latest
 
-    # Steps to run inside the job
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -22,12 +18,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: '3.x'  # Specify the Python version you want to use
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install pytest  # Install pytest for running tests
 
     - name: Run tests
       run: |
